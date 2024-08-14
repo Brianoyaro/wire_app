@@ -1,9 +1,9 @@
 from app import app, db
 from flask import render_template, redirect, url_for, flash, request
-from app.forms import LoginForm, RegistrationForm, NewItemForm
+from app.forms import LoginForm, RegisterForm, NewItemForm
 from flask_login import login_user, current_user, logout_user, login_required
 from app.models import User, Cart, Category, Item
-from werkezeug.urls import url_parse
+from werkzeug.urls import url_parse
 from PIL import Image
 import os
 import secrets
@@ -43,7 +43,7 @@ def register():
     '''registers a new user'''
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    form = RegistrationForm()
+    form = RegisterForm()
     if form.validate_on_submit():
         user = User(email=form.email.data)
         user.set_password(form.password.data)
@@ -145,7 +145,7 @@ def cart():
     return render_template('cart.html', entries=entries, title='My Cart')
 
 
-@app.route('/cart/item/<pk>', methods='POST')
+@app.route('/cart/item/<pk>', methods=['POST'])
 @login_required
 def delete_from_cart(pk):
     '''Confirms if a user wants to delete an item from their cart'''

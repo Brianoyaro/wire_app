@@ -9,8 +9,8 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(), nullable=False)
     password_hash = db.Column(db.String())
     # I think this relationship to Cart is redundant and utterly not necessary. On second thought, I think that it should stay i.e cart.seller.email helps me access user.email from Cart object
-    cart = db.Relationship('Cart', backref='owner', lazy=dynamic)
-    items = db.Relationship('Item', backref='seller', lazy=dynamic)
+    cart = db.relationship('Cart', backref='owner', lazy='dynamic')
+    items = db.relationship('Item', backref='seller', lazy='dynamic')
 
     def __str__(self):
         return '{}: {}'.format(self.id, self.email)
@@ -26,7 +26,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # store he name in lower to help in crosschecking category_name if it exists in the database
     name = db.Column(db.String(40), unique=True)
-    items = db.relationship('Item', backref='category', lazy=dynamic)
+    items = db.relationship('Item', backref='category', lazy='dynamic')
 
     def __str__(self):
         return self.name
