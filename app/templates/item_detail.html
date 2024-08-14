@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <img src="url_for('static', filename='pictures/' + item.image)" alt="{{ item.name }}'s image">
+    <p>Name: {{ item.name }}</p>
+    <p>Price: {{ item.price }}</p>
+    <p>Seller: {{ item.seller.name }}</p>
+    <form action="url_for('item_detail', item.id)" method="post">
+        <button type="submit">Add to cart</button>
+        <input type="number" name="quantity" id="quantity">
+    </form>
+</div>
+{{ item.description }}
+{% endblock %}

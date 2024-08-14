@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for entry in entries %}
+    <div class="display: inline-flex">
+        <img src="url_for('static', filename='pictures/' + entry.item.image)" alt="{{ entry.item.name }}'s image">
+        <div>
+            <p>Name: {{ entry.item.name }}</p>
+            <p>Price: {{ entry.item.price }}</p>
+            <p>Quantity: {{ entry.quantity }}</p>
+            <p>Sum: {{ entry.item.price * item.quantity }}</p>
+        </div>
+        <a href="{{ url_for('delete_from_cart', entry.item.id)}}">Remove from cart</a>
+    </div>
+    <hr>
+{% endfor %}
+<hr>
+<p>Total: $12121121121</p>
+{% endblock %}

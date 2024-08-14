@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Index page</p>
+
+{% for category, items in data.items() %}
+    <div>
+        <h3>{{ category }}</h3>
+        <div class="display: inline-flex">
+            {% for item in items %}
+                <a href="url_for('item_detail', item.id )">
+                    <div>
+                        <img src="url_for('static', filename='pictures/' + item.image)" alt="{{ item.name }}'s image">
+                        <p>{{ item.name }}</p>
+                        <p>{{ item.price }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+{% endfor %}
+
+{% endblock %}

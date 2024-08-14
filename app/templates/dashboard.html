@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p>Dashboard: Show all items that I am selling</p>
+<p><a href="url_for('new_item')">Add New Item</a></p>
+{% if data %}
+    {% for category, items in data.items() %}
+        <div>
+            <h3>{{ category }}</h3>
+            <div style="display: inline-flex">
+                {% for item in items %}
+                <div>
+                    <img src="url_for('static', filename='pictures' + item.image)" alt="{{ item.name }}'s image">
+                    <p>{{ item.name }}</p>
+                    <p>{{ item.price }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
